@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Hider.Views.CalculatePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:Hider.ViewModels"
+    x:Name="page"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewmodel:CalculatePageModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="buttontemplate">
+                <StackLayout>
+                    <Button
+                        Margin="2"
+                        BackgroundColor="Transparent"
+                        Command="{Binding BindingContext.ButtonPressedCommand, Source={x:Reference page}}"
+                        CommandParameter="{Binding .}"
+                        CornerRadius="0"
+                        FontSize="30"
+                        HeightRequest="110"
+                        Text="{Binding .}"
+                        TextColor="White"
+                        WidthRequest="87" />
+                </StackLayout>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid
+        BackgroundColor="Black"
+        ColumnDefinitions="Auto,Auto,Auto,Auto"
+        RowDefinitions="*,Auto">
+        <StackLayout
+            Grid.ColumnSpan="4"
+            BackgroundColor="#1D212D"
+            VerticalOptions="FillAndExpand"
+            WidthRequest="{Binding Width, Source={x:Reference page}}">
+            <Label
+                Margin="10,10,10,0"
+                FontAutoScalingEnabled="True"
+                FontSize="50"
+                HorizontalOptions="End"
+                MaxLines="1"
+                Text="{Binding DisplayText}"
+                TextColor="White"
+                VerticalOptions="EndAndExpand" />
+            <Label
+                Margin="10,0,10,10"
+                FontSize="30"
+                HorizontalOptions="End"
+                Text="{Binding Answer}"
+                TextColor="Gray" />
+        </StackLayout>
+
+        <CollectionView
+            Grid.Row="1"
+            ItemTemplate="{StaticResource buttontemplate}"
+            ItemsSource="{Binding Row1}" />
+        <CollectionView
+            Grid.Row="1"
+            Grid.Column="1"
+            ItemTemplate="{StaticResource buttontemplate}"
+            ItemsSource="{Binding Row2}" />
+        <CollectionView
+            Grid.Row="1"
+            Grid.Column="2"
+            ItemTemplate="{StaticResource buttontemplate}"
+            ItemsSource="{Binding Row3}" />
+        <CollectionView
+            Grid.RowSpan="2"
+            Grid.Column="3"
+            HorizontalOptions="EndAndExpand"
+            ItemsSource="{Binding Row4}"
+            VerticalOptions="EndAndExpand">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Button
+                            BackgroundColor="#111520"
+                            BorderColor="{AppThemeBinding Dark=Black,
+                                                          Light=White}"
+                            Command="{Binding BindingContext.ButtonPressedCommand, Source={x:Reference page}}"
+                            CommandParameter="{Binding .}"
+                            CornerRadius="0"
+                            FontSize="20"
+                            HeightRequest="90.6"
+                            Text="{Binding .}"
+                            TextColor="White"
+                            WidthRequest="100" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
