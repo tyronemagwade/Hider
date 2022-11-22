@@ -37,7 +37,18 @@ public partial class CalculatePageModel : ObservableObject
             string password = Preferences.Get("Password", null);
 
             if (DisplayText == password)
-                await App.Current.MainPage.Navigation.PushAsync(new FingerprintPage());
+            {
+                var request = new AuthenticationRequestConfiguration("Touch the print sensor!","To open the locker");
+                var result = await CrossFingerprint.Current.AuthenticateAsync(request);
+                if (result.Authenticated)
+                {
+                    await App.Current.MainPage.Navigation.PushAsync(new MainPage());
+                }
+                else
+                {
+                    // not allowed to do secret stuff :(
+                }
+            }
             //Calculate 
             else
             {

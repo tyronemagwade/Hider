@@ -1,17 +1,42 @@
-﻿<?xml version = "1.0" encoding = "UTF-8" ?>
-<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Hider"
-             x:Class="Hider.App">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application
+    x:Class="Hider.App"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Hider"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
     <Application.Resources>
         <ResourceDictionary>
 
             <Style TargetType="ContentPage">
-                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Black,Light=White}"/>
-                <Setter Property="NavigationPage.HasNavigationBar" Value="False"/>
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Black, Light=White}" />
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False" />
             </Style>
             <Style TargetType="Label">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black,Dark=White}"/>
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+            </Style>
+            <Style TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="30" />
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HorizontalOptions" Value="Fill" />
+                <Setter Property="Padding" Value="4" />
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="1" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

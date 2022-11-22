@@ -6,6 +6,6 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new NavigationPage(new FingerprintPage());
+		MainPage = new NavigationPage(new BrowserPage());
 	}
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="Hider.Views.BrowserPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:Hider.Controls"
+    xmlns:viewmodel="clr-namespace:Hider.ViewModels"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.BindingContext>
+        <viewmodel:BrowserPageModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="50,*" BackgroundColor="white">
+        <StackLayout Orientation="Horizontal">
+            <ImageButton Margin="4" Source="downarrow" />
+            <Frame
+                Margin="0,4,12,2"
+                Padding="2"
+                BorderColor="Blue"
+                CornerRadius="{OnPlatform WinUI='15', Default='130'}"
+                HorizontalOptions="FillAndExpand">
+                <StackLayout Orientation="Horizontal">
+                    <Entry Margin="5,3,-7,-9" HorizontalOptions="FillAndExpand" Completed="Entry_Completed" />
+                    <ImageButton
+                        x:Name="reload"
+                        Clicked="ImageButton_Clicked_2"
+                        Source="refresh" />
+                </StackLayout>
+
+            </Frame>
+            <ImageButton Source="bookmark" />
+            <ImageButton Command="{Binding GoDownloadsPageCommand}" Source="download" />
+        </StackLayout>
+
+        <Grid Grid.Row="1" RowDefinitions="30,*,45">
+            <ProgressBar
+                BackgroundColor="Transparent"
+                Progress="{Binding MyProgress}"
+                ProgressColor="Yellow"
+                VerticalOptions="CenterAndExpand" />
+            <controls:WebViewControl
+                x:Name="web"
+                Grid.Row="1"
+                Source="{Binding Searchtext}" />
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                <StackLayout.Resources>
+                    <ResourceDictionary>
+                        <Style TargetType="ImageButton">
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="WidthRequest" Value="72" />
+                        </Style>
+                    </ResourceDictionary>
+                </StackLayout.Resources>
+                <ImageButton
+                    Clicked="ImageButton_Clicked"
+                    IsEnabled="{Binding CanGoBack, Source={x:Reference web}}"
+                    Source="back" />
+                <ImageButton
+                    Clicked="ImageButton_Clicked_1"
+                    IsEnabled="{Binding CanGoForward, Source={x:Reference web}}"
+                    Rotation="180"
+                    Source="back" />
+                <ImageButton Source="home" />
+                <Button
+                    BackgroundColor="Transparent"
+                    BorderColor="Black"
+                    Text="5"
+                    TextColor="Black"
+                    WidthRequest="72" />
+                <ImageButton Source="menu" />
+            </StackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>
